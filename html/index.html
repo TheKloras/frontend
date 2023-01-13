@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+</head>
+<body>
+    <div id="main">
+        <input type="text" id="inputField" placeholder="Paieska">
+        <button id="searchButton" onclick="search()">Ieskoti</button>
+    </div>
+    <script>
+        const testas = document.body;
+        const resultDiv = document.createElement("div");
+        const resultInfo = document.createElement("p");
+        resultDiv.setAttribute("result","result")
+        resultInfo.setAttribute(resultInfo,resultInfo)
+        testas.after(resultDiv);
+
+        async function search(inputField) {
+            let returnedData;
+
+            fetch('https://www.fruityvice.com/api/fruit/' + document.getElementById('inputField').value)
+                .then((response) => response.json())
+                .then((data) => console.log(data));
+
+            await fetch('https://www.fruityvice.com/api/fruit/' + document.getElementById('inputField').value).then(response =>
+                response.json().then(data => ({
+                        data: data,
+                        status: response.status
+                    })
+                ).then(res => {
+                    returnedData = res
+                }));
+
+            if (returnedData.status == 200){
+                const node = document.createElement("p");
+                const textnode = document.createTextNode("Pavadinimas" + toString(returnedData.name));
+                node.appendChild(textnode);
+                document.getElementById("main").appendChild(node);
+            }
+        }
+    </script>
+    </body>
+</html>
