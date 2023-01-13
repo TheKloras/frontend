@@ -35,7 +35,7 @@
 
             if (returnedData.status == 200){
                 const node = document.createElement("p");
-                const textnode = document.createTextNode("Pavadinimas" + toString(returnedData.name));
+                const textnode = document.createTextNode("Pavadinimas" + toString(JSON.stringify(returnedData.name)));
                 node.appendChild(textnode);
                 document.getElementById("main").appendChild(node);
             }
